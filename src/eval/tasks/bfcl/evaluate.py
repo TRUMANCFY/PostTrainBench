@@ -70,6 +70,13 @@ def tool_call_parser_name(args) -> str:
 def main() -> None:
     args = parse_args()
 
+    # vllm + transformers run validate_repo_id before the local-dir fallback;
+    # multi-slash relative paths (e.g. results/.../final_model) get rejected
+    # as invalid HF repo ids. Resolve to absolute path so the local-dir branch
+    # is taken cleanly regardless of cwd.
+    if os.path.isdir(args.model_path):
+        args.model_path = os.path.abspath(args.model_path)
+
     init_display_type("plain")
 
     other_kwargs = {}

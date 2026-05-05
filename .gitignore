@@ -2,9 +2,19 @@ test*.err
 test*.out
 test*.log
 
-# Agent auth tokens 
+# Agent auth tokens
 agents/*/auth.json
 agents/*/oauth_token
+
+# Run artifacts
+results/
+probe_logs/
+hf_cache/
+slurm-*.out
+slurm-*.err
+eval_attempt_*.log
+output.log
+error.log
 
 .claude 
 
